@@ -8,15 +8,20 @@ namespace FoodBuddy.UnitTests.ControllerTests
 {
     public class HomeControllerTests
     {
-        [Fact]
-        public void Index_should_return_index_view()
+        private readonly HomeController _controller;
+
+        public HomeControllerTests()
         {
             // Arrange
             var recipeServiceMock = new Mock<IRecipeService>();
-            var controller = new HomeController(recipeServiceMock.Object);
+            _controller = new HomeController(recipeServiceMock.Object);
+        }
 
+        [Fact]
+        public void Index_should_return_index_view()
+        {
             // Act
-            var result = controller.Index() as ViewResult;
+            var result = _controller.Index() as ViewResult;
 
             // Assert
             Assert.NotNull(result);
@@ -27,12 +32,8 @@ namespace FoodBuddy.UnitTests.ControllerTests
         [Fact]
         public void About_should_return_about_view()
         {
-            // Arrange
-            var recipeServiceMock = new Mock<IRecipeService>();
-            var controller = new HomeController(recipeServiceMock.Object);
-
             // Act
-            var result = controller.About() as ViewResult;
+            var result = _controller.About() as ViewResult;
 
             // Assert
             Assert.NotNull(result);
@@ -43,12 +44,8 @@ namespace FoodBuddy.UnitTests.ControllerTests
         [Fact]
         public void RecipeDetail_should_return_recipe_detail_view()
         {
-            // Arrange
-            var recipeServiceMock = new Mock<IRecipeService>();
-            var controller = new HomeController(recipeServiceMock.Object);
-
             // Act
-            var result = controller.RecipeDetail(1) as ViewResult;
+            var result = _controller.RecipeDetail(1) as ViewResult;
 
             // Assert
             Assert.NotNull(result);
