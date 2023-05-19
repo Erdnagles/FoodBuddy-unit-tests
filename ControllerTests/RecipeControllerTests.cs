@@ -32,11 +32,49 @@ namespace FoodBuddy.UnitTests.ControllerTests
 
             // Assert
             Assert.NotNull(result);
+            Assert.IsType<ViewResult>(result);
             Assert.IsType<Recipe>(result.Model);
         }
 
         [Fact]
-        public void DeleteConfirmed_should_redirect()
+        public void Add_post_with_valid_model_redirects_to_add()
+        {
+            // Arrange
+            var model = new Recipe();
+            _controller.ModelState.AddModelError("Title", "Title is required");
+            _controller.ModelState.AddModelError("Guide", "Guide is required");
+            _controller.ModelState.AddModelError("Ingredients", "Ingredients is required");
+
+
+            // Act
+            var result = _controller.Add(model) as ViewResult;
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.IsType<ViewResult>(result);
+            Assert.IsType<Recipe>(result.Model);
+        }
+
+        [Fact]
+        public void Edit_post_with_valid_model_redirects_to_edit()
+        {
+            // Arrange
+            var model = new Recipe();
+            _controller.ModelState.AddModelError("Title", "Title is required");
+            _controller.ModelState.AddModelError("Description", "Description is required");
+            _controller.ModelState.AddModelError("Guide", "Guide is required");  
+            
+            // Act
+            var result = _controller.Edit(model) as ViewResult;
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.IsType<ViewResult>(result);
+            Assert.IsType<Recipe>(result.Model);
+        }
+
+        [Fact]
+        public void Delete_confirmed_should_redirect()
         {
             // Arrange
             var id = 1;
